@@ -1,0 +1,63 @@
+clear all
+
+d = load('processed_data_tocabi_mocap.txt');
+
+start_pose = [0.0, 0.0, -0.24, 0.6, -0.36, 0.0, ...
+            0.0, 0.0, -0.24, 0.6, -0.36, 0.0, ...
+            0.0, 0.0, 0.0, ...
+            0.3, 0.3, 1.5, -1.27, -1.0, 0.0, -1.0, 0.0, ...
+            0.0, 0.0, ...
+            -0.3, -0.3, -1.5, 1.27, 1.0, 0.0, 1.0, 0.0];
+        
+cycle_start_idx = 31112;
+cycle_end_idx = 34712;
+
+data = zeros(cycle_end_idx-cycle_start_idx, 1 + size(start_pose,2) + 2);
+
+data(:, 1) = (0:cycle_end_idx-cycle_start_idx-1)/2000.0;
+d(:,1) = d(:,1) * (cycle_end_idx-cycle_start_idx-1)/2000.0 / d(end,1);
+cur_idx = 1;
+for i=1:size(data,1)
+    pre_idx = cur_idx-1;
+    if (pre_idx ==0)
+        pre_idx=1;
+    end
+    for j=2:13
+        data(i,j) = cubic(data(i,1), d(cur_idx,1), d(cur_idx+1,1), d(cur_idx,j), d(cur_idx+1,j), ...
+                                (d(cur_idx,j) - d(pre_idx,j))/(d(cur_idx+1,1) - d(cur_idx,1)), (d(cur_idx+1,j) - d(cur_idx,j))/(d(cur_idx+1,1) - d(cur_idx,1)));
+    end
+    if (data(i,1) >= d(cur_idx+1,1))
+        cur_idx = cur_idx + 1;
+    end
+end
+data(:, 14:34) = repmat(start_pose(13:33), size(data,1) , 1);
+
+%% Force Reference
+f_z_max = -1025;
+
+%DSP (left decrease, right increase)
+for i=3474:3600
+    data(i,35) = cubic(i-3474, 0, 311, f_z_max, 0.0,  0, 0); %f_z_max + (i-3300)/600 * abs(f_z_max);
+    data(i,36) = cubic(i-3474, 0, 311, 0.0, f_z_max, 0, 0);%-(i-3300)/600 * abs(f_z_max);
+end
+for i=1:185
+    data(i,35) = cubic(i+125, 0, 311, f_z_max, 0.0,  0, 0); %f_z_max + (i-3300)/600 * abs(f_z_max);
+    data(i,36) = cubic(i+125, 0, 311, 0.0, f_z_max, 0, 0);%-(i-3300)/600 * abs(f_z_max);
+end
+%Right
+for i=186:1676
+    data(i,35) = 0.0;
+    data(i,36) = f_z_max;
+end
+% DSP (left increase, right decrease)
+for i=1670:2066
+    data(i,35) = cubic(i-1670, 0, 311, 0.0, f_z_max, 0, 0);%-(i-1500)/600 * abs(f_z_max);
+    data(i,36) = cubic(i-1670, 0, 311, f_z_max, 0.0, 0, 0);%f_z_max + (i-1500)/600 *abs(f_z_max);
+end
+% Left
+for i=1996:3474
+    data(i,35) = f_z_max;
+    data(i,36) = 0.0;
+end
+
+save('processed_data_tocabi_mocap_with_force_reference.txt', 'data', '-ascii', '-double', '-tabs')
