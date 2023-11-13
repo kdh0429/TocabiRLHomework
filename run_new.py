@@ -31,9 +31,6 @@ class args:
    final_lr = 2e-7
    env = None
    play_model = "ppo2_DYROSTocabi_2023-08-14 12:54:09.115534" # tranined model name
-   use_pretrained_gravity = False
-   gravity_model = "pretrained_2023-03-16 00:38:34.004213"
-   flat_terrain = False
 
 def linear_schedule(initial_lr: float, final_lr:float) -> Callable[[float], float]:
     """
@@ -92,12 +89,7 @@ def train():
    model = PPO('FixedStddevMlpPolicy', args.env, n_steps=args.n_steps, 
                batch_size=args.batch_size, render=args.render, 
                learning_rate=linear_schedule(initial_lr=args.initial_lr, final_lr=args.final_lr), task=args.task)
-   if (args.use_pretrained_gravity):
-      pretrained_file_name = os.path.join("trained_model", args.task, args.gravity_model)
-      model = PPO.load(pretrained_file_name, env=args.env)
-      model.learning_rate=linear_schedule(initial_lr=args.initial_lr, final_lr=args.final_lr)
-      model.task = args.task
-      model.render = args.render
+
    model.learn(total_timesteps=args.total_timesteps)
    save_model(model, file_name=file_name)
 
