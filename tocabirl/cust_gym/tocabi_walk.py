@@ -237,7 +237,10 @@ class DYROSTocabiEnv(tocabi_walk_env.TocabiEnv):
         if ((abs(self.ft_left_foot[2] - self.ft_left_foot_pre[2]) >  0.2 * 9.81 * sum(self.model.body_mass)) or (abs(self.ft_right_foot[2] - self.ft_right_foot_pre[2]) > 0.2 * 9.81 * sum(self.model.body_mass))):
             force_diff_thres_penalty = -0.05
 
-        reward = mimic_body_orientation_reward + qpos_regulation + qvel_regulation + contact_force_penalty + torque_regulation + torque_diff_regulation + qacc_regulation + body_vel_reward + foot_contact_reward + contact_force_diff_regulation + double_support_force_diff_regulation + force_thres_penalty + force_diff_thres_penalty + force_ref_reward
+        reward = mimic_body_orientation_reward + qpos_regulation + qvel_regulation + \
+                contact_force_penalty + torque_regulation + torque_diff_regulation + \
+                qacc_regulation + body_vel_reward + foot_contact_reward + contact_force_diff_regulation + \
+                force_thres_penalty + force_diff_thres_penalty + force_ref_reward
         
         self.ft_left_foot_pre = np.copy(self.ft_left_foot)
         self.ft_right_foot_pre = np.copy(self.ft_right_foot)

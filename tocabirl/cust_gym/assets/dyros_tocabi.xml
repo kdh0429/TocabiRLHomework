@@ -14,22 +14,6 @@
         <default class="FTsensor">
             <site group="4" rgba=".1 .1 .9 1" size="0.005 0.005" type="cylinder" />
         </default>
-
-        <default class="shg25_100_2so">
-            <joint armature="0.413" damping="0.22" frictionloss="1.32" />
-        </default>  
-
-        <default class="shg17_100_2so">
-            <joint armature="0.079" damping="0.22" frictionloss="1.32" />
-        </default>  
-
-        <default class="shg14_100_2so">
-            <joint armature="0.033" damping="0.22" frictionloss="0.32" />
-        </default>  
-
-        <default class="csf_11_100_2xh_f">
-            <joint armature="0.014" damping="0.22" frictionloss="0.32" />
-        </default>  
     </default>
     <option cone="elliptic" gravity="0 0 -9.81" iterations="50" jacobian="dense" solver="Newton" timestep="0.0005" tolerance="1e-10" />
 
@@ -105,7 +89,7 @@
             <site group="4" name="Pelvis_IMU" rgba=".1 .1 .9 1" size="0.005 0.005" type="cylinder" />
             <body name="L_HipRoll_Link" pos="0.11 0.1025 -0.1025">
                 <inertial fullinertia="0.01821 0.03121 0.2928 -1.676E-07 -0.0007745 -4.53E-09" mass="2.679" pos="-0.06477 0 0.05149" />
-                <joint axis="0 0 1" armature="0.614" damping="0.22" frictionloss="8.22" limited="true" name="L_HipYaw_Joint" pos="0 0 0" range="-3.14 3.14" />
+                <joint axis="0 0 1" armature="0.614" damping="2.0" frictionloss="8.22" limited="true" name="L_HipYaw_Joint" pos="0 0 0" range="-3.14 3.14" />
                 <geom class="viz" mesh="HipRoll_L_Link" rgba="0.20313 0.20313 0.20313 1" />
                 <geom class="cls" pos="-0.1 0 0" quat="0.707107 0 0.707107 0" size="0.045 0.04" type="cylinder" />
                 <geom class="cls" pos="-0.016 0 0.085" size="0.077 0.05 0.01" type="box" />
@@ -113,30 +97,30 @@
                 <geom class="cls" pos="-0.087 0 0.0475" size="0.006 0.036 0.0475" type="box" />
                 <body name="L_HipCenter_Link" pos="0 0 0">
                     <inertial fullinertia="0.3553 0.009161 0.00876 1.725E-08 -3.236E-06 -4.778E-06" mass="2.67" pos="-0.04801 0.0022 2e-05" />
-                    <joint axis="1 0 0" armature="0.862" damping="0.22" frictionloss="4.3" limited="true" name="L_HipRoll_Joint" pos="0 0 0" range="-3.14 3.14" />
+                    <joint axis="1 0 0" armature="0.862" damping="2.0" frictionloss="4.3" limited="true" name="L_HipRoll_Joint" pos="0 0 0" range="-3.14 3.14" />
                     <geom class="viz" mesh="HipCenter_L_Link" rgba="0.20313 0.20313 0.20313 1" />
                     <geom class="cls" pos="-0.0045 0 0" size="0.05225 0.03 0.0475" type="box" />
                     <body name="L_Thigh_Link" pos="0 0 0">
                         <inertial fullinertia="0.0794 0.080 0.009967 4.1E-05 0.000727 -0.001537" mass="5.65" pos="-0.0003 0.00032 -0.247" />
-                        <joint axis="0 1 0" armature="1.09" damping="0.22" frictionloss="3.77" limited="true" name="L_HipPitch_Joint" pos="0 0 0" range="-3.14 3.14" />
+                        <joint axis="0 1 0" armature="1.09" damping="2.0" frictionloss="3.77" limited="true" name="L_HipPitch_Joint" pos="0 0 0" range="-3.14 3.14" />
                         <geom class="viz" mesh="Thigh_L_Link" rgba="0.85938 0.07813 0.23438 1" />
                         <geom class="cls" pos="0 0 -0.35" quat="0.707107 0.707107 0 0" size="0.049 0.038815" type="cylinder" />
                         <geom class="cls" pos="0 0 -0.1923" size="0.06 0.10875" type="cylinder" />
                         <geom class="viz" pos="0 0 -0.1723" rgba="0.20313 0.20313 0.20313 1" size="0.033 0.02 0.06875" type="box" />
                         <body name="L_Knee_Link" pos="0 0 -0.35">
                             <inertial fullinertia="0.1506 0.5588 0.007451 2.887E-05 0.002607 0.001486" mass="2.614" pos="0.007 0.00214 -0.1686" />
-                            <joint axis="0 1 0" armature="1.09" damping="0.22" frictionloss="4.18" limited="true" name="L_Knee_Joint" pos="0 0 0" range="-3.14 3.14" />
+                            <joint axis="0 1 0" armature="1.09" damping="2.0" frictionloss="4.18" limited="true" name="L_Knee_Joint" pos="0 0 0" range="-3.14 3.14" />
                             <geom class="viz" mesh="Knee_L_Link" rgba="0.85938 0.07813 0.23438 1" />
                             <geom class="cls" pos="0 0 -0.175" size="0.06 0.1" type="cylinder" />
                             <geom class="viz" pos="0 0 -0.1603" rgba="0.20313 0.20313 0.20313 1" size="0.028 0.02 0.06875" type="box" />
                             <body name="L_AnkleCenter_Link" pos="0 0 -0.35">
                                 <inertial fullinertia="0.003548 0.004046 0.00397 4.0E-06 2.222E-06 5.0E-06" mass="2.833" pos="-0.00228 -0.0006 0.0" />
-                                <joint axis="0 1 0" armature="1.09" damping="0.22" frictionloss="7.09" limited="true" name="L_AnklePitch_Joint" pos="0 0 0" range="-3.14 3.14" />
+                                <joint axis="0 1 0" armature="1.09" damping="2.0" frictionloss="7.09" limited="true" name="L_AnklePitch_Joint" pos="0 0 0" range="-3.14 3.14" />
                                 <geom class="viz" mesh="AnkleCenter_L_Link" rgba="0.20313 0.20313 0.20313 1" />
                                 <geom class="cls" pos="-0.0045 0 0" size="0.05225 0.03 0.0475" type="box" />
                                 <body name="L_AnkleRoll_Link" pos="0 0 0">
                                     <inertial fullinertia="0.003951 0.008642 0.007223 2e-05 0.0019 -5.435E-06" mass="2.1" pos="-0.0746 0.0 -0.0096" />
-                                    <joint axis="1 0 0" armature="0.360" damping="0.22" frictionloss="3.41" limited="true" name="L_AnkleRoll_Joint" pos="0 0 0" range="-3.14 3.14" />
+                                    <joint axis="1 0 0" armature="0.360" damping="2.0" frictionloss="3.41" limited="true" name="L_AnkleRoll_Joint" pos="0 0 0" range="-3.14 3.14" />
                                     <geom class="viz" mesh="AnkleRoll_L_Link" rgba="0.85938 0.07813 0.23438 1" />
                                     <geom class="cls" pos="-0.08875 0 0" quat="0.707107 0 -0.707107 0" size="0.045 0.03125" type="cylinder" />
                                     <body name="L_Foot_Link" pos="0 0 0">
@@ -155,7 +139,7 @@
 
             <body name="R_HipRoll_Link" pos="0.11 -0.1025 -0.1025">
                 <inertial fullinertia="0.01821 0.03121 0.2928 -1.676E-07 -0.0007745 -4.53E-09" mass="2.679" pos="-0.06477 0 0.05149" />
-                <joint axis="0 0 1" armature="0.614" damping="0.22" frictionloss="8.22" limited="true" name="R_HipYaw_Joint" pos="0 0 0" range="-3.14 3.14" />
+                <joint axis="0 0 1" armature="0.614" damping="2.0" frictionloss="8.22" limited="true" name="R_HipYaw_Joint" pos="0 0 0" range="-3.14 3.14" />
                 <geom class="viz" mesh="HipRoll_R_link" rgba="0.20313 0.20313 0.20313 1" />
                 <geom class="cls" pos="-0.1 0 0" quat="0.707107 0 0.707107 0" size="0.045 0.04" type="cylinder" />
                 <geom class="cls" pos="-0.016 0 0.085" size="0.077 0.05 0.01" type="box" />
@@ -163,30 +147,30 @@
                 <geom class="cls" pos="-0.087 0 0.0475" size="0.006 0.036 0.0475" type="box" />
                 <body name="R_HipCenter_Link" pos="0 0 0">
                     <inertial fullinertia="0.3553 0.009161 0.00876 1.725E-08 -3.236E-06 -4.778E-06" mass="2.67" pos="-0.04801 -0.0022 2e-05" />
-                    <joint axis="1 0 0" armature="0.862" damping="0.22" frictionloss="4.3" limited="true" name="R_HipRoll_Joint" pos="0 0 0" range="-3.14 3.14" />
+                    <joint axis="1 0 0" armature="0.862" damping="2.0" frictionloss="4.3" limited="true" name="R_HipRoll_Joint" pos="0 0 0" range="-3.14 3.14" />
                     <geom class="viz" mesh="HipCenter_R_Link" rgba="0.20313 0.20313 0.20313 1" />
                     <geom class="cls" pos="-0.0045 0 0" size="0.05225 0.03 0.0475" type="box" />
                     <body name="R_Thigh_Link" pos="0 0 0">
                         <inertial fullinertia="0.0794 0.080 0.009967 4.1E-05 0.000727 0.001537" mass="5.65" pos="-0.0003 -0.00032 -0.247" />
-                        <joint axis="0 1 0" armature="1.09" damping="0.22" frictionloss="3.77" limited="true" name="R_HipPitch_Joint" pos="0 0 0" range="-3.14 3.14" />
+                        <joint axis="0 1 0" armature="1.09" damping="2.0" frictionloss="3.77" limited="true" name="R_HipPitch_Joint" pos="0 0 0" range="-3.14 3.14" />
                         <geom class="viz" mesh="Thigh_R_Link" rgba="0.85938 0.07813 0.23438 1" />
                         <geom class="cls" pos="0 0 -0.35" quat="0.707107 0.707107 0 0" size="0.049 0.038815" type="cylinder" />
                         <geom class="cls" pos="0 0 -0.1923" size="0.06 0.10875" type="cylinder" />
                         <geom class="viz" pos="0 0 -0.1723" rgba="0.20313 0.20313 0.20313 1" size="0.033 0.02 0.06875" type="box" />
                         <body name="R_Knee_Link" pos="0 0 -0.35">
                             <inertial fullinertia="0.1506 0.5588 0.007451 -2.887E-05 -0.002607 -0.001486" mass="2.614" pos="0.007 0.00214 -0.1686" />
-                            <joint axis="0 1 0" armature="1.09" damping="0.22" frictionloss="4.18" limited="true" name="R_Knee_Joint" pos="0 0 0" range="-3.14 3.14" />
+                            <joint axis="0 1 0" armature="1.09" damping="2.0" frictionloss="4.18" limited="true" name="R_Knee_Joint" pos="0 0 0" range="-3.14 3.14" />
                             <geom class="viz" mesh="Knee_R_Link" rgba="0.85938 0.07813 0.23438 1" />
                             <geom class="cls" pos="0 0 -0.175" size="0.06 0.1" type="cylinder" />
                             <geom class="viz" pos="0 0 -0.1603" rgba="0.20313 0.20313 0.20313 1" size="0.028 0.02 0.06875" type="box" />
                             <body name="R_AnkleCenter_Link" pos="0 0 -0.35">
                                 <inertial fullinertia="0.003548 0.004046 0.00397 -4.0E-06 -2.222E-06 5.0E-06" mass="2.833" pos="-0.00228 0.0006 0.0" />
-                                <joint axis="0 1 0" armature="1.09" damping="0.22" frictionloss="7.09" limited="true" name="R_AnklePitch_Joint" pos="0 0 0" range="-3.14 3.14" />
+                                <joint axis="0 1 0" armature="1.09" damping="2.0" frictionloss="7.09" limited="true" name="R_AnklePitch_Joint" pos="0 0 0" range="-3.14 3.14" />
                                 <geom class="viz" mesh="AnkleCenter_R_Link" rgba="0.20313 0.20313 0.20313 1" />
                                 <geom class="cls" pos="-0.0045 0 0" size="0.05225 0.03 0.0475" type="box" />
                                 <body name="R_AnkleRoll_Link" pos="0 0 0">
                                     <inertial fullinertia="0.003951 0.008642 0.007223 2e-05 0.0019 -5.435E-06" mass="2.1" pos="-0.0746 0.0 -0.0096" />
-                                    <joint axis="1 0 0" armature="0.360" damping="0.22" frictionloss="3.41" limited="true" name="R_AnkleRoll_Joint" pos="0 0 0" range="-3.14 3.14" />
+                                    <joint axis="1 0 0" armature="0.360" damping="2.0" frictionloss="3.41" limited="true" name="R_AnkleRoll_Joint" pos="0 0 0" range="-3.14 3.14" />
                                     <geom class="viz" mesh="AnkleRoll_R_Link" rgba="0.85938 0.07813 0.23438 1" />
                                     <geom class="cls" pos="-0.08875 0 0" quat="0.707107 0 -0.707107 0" size="0.045 0.03125" type="cylinder" />
                                     <body name="R_Foot_Link" pos="0 0 0">
@@ -205,7 +189,7 @@
 
             <body name="Waist1_Link" pos="0.11 0 0.1979">
                 <inertial fullinertia="0.06657 0.02504 0.08023 0.0001591 0.0001333 0.0003246" mass="6.477" pos="-0.033735 0 -0.0386" />
-                <joint axis="0 0 1" class="shg25_100_2so" limited="true" name="Waist1_Joint" pos="0 0 0" range="-2.094 2.094" />
+                <joint axis="0 0 1" armature="0.078" damping="2.0" frictionloss="15.0" limited="true" name="Waist1_Joint" pos="0 0 0" range="-2.094 2.094" />
                 <geom class="viz" mesh="waist1" pos="0 0 -0.085" quat="0 0.707107 0 0.707107" rgba="0.85938 0.07813 0.23438 1" />
                 <geom class="cls" pos="0 0 -0.096" size="0.05 0.01" type="cylinder" />
                 <geom class="cls" pos="0 0 -0.081" size="0.047 0.065 0.005" type="box" />
@@ -217,14 +201,14 @@
 
                 <body name="Waist2_Link" pos="0 0 0">
                     <inertial fullinertia="0.006439 0.007393 0.007618 -1e-05 0.0 -1e-06" mass="3.881" pos="-0.000266 0.009 0" />
-                    <joint axis="0 1 0" class="shg25_100_2so" limited="true" name="Waist2_Joint" pos="0 0 0" range="-2.094 2.094" />
+                    <joint axis="0 1 0" armature="0.078" damping="2.0" frictionloss="15.0" limited="true" name="Waist2_Joint" pos="0 0 0" range="-2.094 2.094" />
                     <geom class="viz" mesh="waist2" rgba="0.20313 0.20313 0.20313 1" />
                     <geom class="cls" quat="0.707107 0.707107 0 0" size="0.055 0.05" type="cylinder" />
                     <geom class="cls" pos="0.02 0 0" size="0.05 0.05 0.03" type="box" />
                     <geom class="cls" pos="-0.02 0 0" size="0.045 0.05 0.0455" type="box" />
                     <body name="Upperbody_Link" pos="0 0 0">
                         <inertial fullinertia="0.309 0.2935 0.2137 0.000385 -0.0422 0.0005" mass="20.034" pos="-0.0608 0.0017 0.1077" quat="0.999909 -0.000268355 -0.0135223 5.11667e-05" />
-                        <joint axis="-1 0 0" class="shg25_100_2so" limited="true" name="Upperbody_Joint" pos="0 0 0" range="-2.094 2.094" />
+                        <joint axis="-1 0 0" armature="0.078" damping="2.0" frictionloss="15.0" limited="true" name="Upperbody_Joint" pos="0 0 0" range="-2.094 2.094" />
                         <geom class="viz" mesh="upperbody" rgba="0.85938 0.07813 0.23438 1" />
                         <geom class="viz" pos="-0.03 0 0.2" rgba="0.20313 0.20313 0.20313 1" size="0.105 0.11 0.05" type="box" />
                         <geom class="viz" pos="-0.03 0 0.115" rgba="0.20313 0.20313 0.20313 1" size="0.105 0.055 0.035" type="box" />
@@ -240,46 +224,46 @@
 
                         <body name="L_Shoulder1_Link" pos="0.023 0.154 0.2275">
                             <inertial fullinertia="0.001925606 0.001936576 0.185330098 0.000001433 0.000002313 0.000078962" mass="1.6762" pos="-3e-05 0.00397 0.06029" />
-                            <joint axis="0 0 1" class="shg17_100_2so" limited="true" name="L_Shoulder1_Joint" pos="0 0 0" range="-2.09 1.54" />
+                            <joint axis="0 0 1" armature="0.18" damping="3.0" frictionloss="2.5" limited="true" name="L_Shoulder1_Joint" pos="0 0 0" range="-2.09 1.54" />
                             <geom class="viz" mesh="L_shoulder1" rgba="0.85938 0.07813 0.23438 1" />
                             <geom class="cls" pos="0 0 0.05" size="0.04 0.055" type="cylinder" />
                             <body name="L_Shoulder2_Link" pos="0 0.0341 0.065">
                                 <inertial fullinertia="0.000989903 0.184275853 0.001067575 0.000028237 -0.000000465 0.000000133" mass="0.4016" pos="0.00107 0.0491 -1e-05" />
-                                <joint axis="0 1 0" class="shg17_100_2so" limited="true" name="L_Shoulder2_Joint" pos="0 0 0" range="-3.14159 3.14159" />
+                                <joint axis="0 1 0" armature="0.18" damping="2.0" frictionloss="2.5" limited="true" name="L_Shoulder2_Joint" pos="0 0 0" range="-3.14159 3.14159" />
                                 <geom class="viz" mesh="L_shoulder2" rgba="0.20313 0.20313 0.20313 1" />
                                 <geom class="cls" pos="0 0.04 0" quat="0.707107 0.707107 0 0" size="0.04 0.025" type="cylinder" />
                                 <body name="L_Shoulder3_Link" pos="0 0.115 0">
                                     <inertial fullinertia="0.192093159 0.002493784 0.008296854 -0.000365084 -0.000002746 -0.000023821" mass="2.90141" pos="0.00262 0.04826 0.00023" />
-                                    <joint axis="-1 0 0" class="shg17_100_2so" limited="true" name="L_Shoulder3_Joint" pos="0 0 0" range="-1.9199 1.9199" />
+                                    <joint axis="-1 0 0" armature="0.18" damping="2.0" frictionloss="2.5" limited="true" name="L_Shoulder3_Joint" pos="0 0 0" range="-1.9199 1.9199" />
                                     <geom class="viz" mesh="L_shoulder3" rgba="0.20313 0.20313 0.20313 1" />
                                     <geom class="cls" pos="0 0.06 0" quat="0.707107 0.707107 0 0" size="0.04 0.06" type="cylinder" />
                                     <geom class="viz" pos="0 0 0" quat="0.707107 0 0.707107 0" rgba="0.20313 0.20313 0.20313 1" size="0.045 0.027" type="cylinder" />
                                     <body name="L_Armlink_Link" pos="0 0.1281 0">
                                         <inertial fullinertia="0.002878609 0.184381923 0.003117058 0.000302586 -0.000036001 0.000398377" mass="0.58517" pos="-0.01896 0.11642 -0.0119" />
-                                        <joint axis="0 1 0" class="shg17_100_2so" limited="true" name="L_Armlink_Joint" pos="0 0 0" range="-3.14159 3.14159" />
+                                        <joint axis="0 1 0" armature="0.18" damping="2.0" frictionloss="2.5" limited="true" name="L_Armlink_Joint" pos="0 0 0" range="-3.14159 3.14159" />
                                         <geom class="viz" mesh="L_arm" rgba="0.85938 0.07813 0.23438 1" />
                                         <geom class="cls" pos="0 0.08 0" quat="0.707107 0.707107 0 0" size="0.04 0.08" type="cylinder" />
                                         <body name="L_Elbow_Link" pos="0 0.207 -0.0325">
                                             <inertial fullinertia="0.055865466 0.001895543 0.005958821 0.000151764 0.000055158 0.001530917" mass="2.06511" pos="-0.00136 0.05256 0.01764" />
-                                            <joint axis="1 0 0" class="shg14_100_2so" limited="true" name="L_Elbow_Joint" pos="0 0 0" range="-3.14159 2.8" />
+                                            <joint axis="1 0 0" armature="0.0032" damping="2.0" frictionloss="2.5" limited="true" name="L_Elbow_Joint" pos="0 0 0" range="-3.14159 2.8" />
                                             <geom class="viz" mesh="L_elbow" rgba="0.20313 0.20313 0.20313 1" />
                                             <geom class="cls" pos="0 0.08 0.0325" quat="0.707107 0.707107 0 0" size="0.04 0.04" type="cylinder" />
                                             <geom class="cls" quat="0.707107 0 0.707107 0" size="0.04 0.04" type="cylinder" />
                                             <geom class="viz" pos="0.003 0 0" quat="0.707107 0 0.707107 0" rgba="0.20313 0.20313 0.20313 1" size="0.034 0.025" type="cylinder" />
                                             <body name="L_Forearm_Link" pos="0 0.1244 0.0325">
                                                 <inertial fullinertia="0.001053636 0.049889479 0.001266418 0.000084568 0.000022117 0.000019539" mass="0.35234" pos="-0.01426 0.0767 0.00033" />
-                                                <joint axis="0 1 0" class="shg14_100_2so" limited="true" name="L_Forearm_Joint" pos="0 0 0" range="-3.14159 3.14159" />
+                                                <joint axis="0 1 0" armature="0.0032" damping="2.0" frictionloss="2.5" limited="true" name="L_Forearm_Joint" pos="0 0 0" range="-3.14159 3.14159" />
                                                 <geom class="viz" mesh="L_forearm" rgba="0.85938 0.07813 0.23438 1" />
                                                 <geom class="cls" pos="0 0.05 0" quat="0.707107 0.707107 0 0" size="0.04 0.05" type="cylinder" />
                                                 <geom class="cls" pos="0 0.1451 0" quat="0.707107 0 0.707107 0" size="0.025 0.04" type="cylinder" />
                                                 <body name="L_Wrist1_Link" pos="0 0.1451 0">
                                                     <inertial fullinertia="0.015205197 0.000396376 0.000683187 0.000024218 -0.000000263 0.000000688" mass="0.70923" pos="-0.00158 0.02153 3e-05" />
-                                                    <joint axis="1 0 0" class="csf_11_100_2xh_f" limited="true" name="L_Wrist1_Joint" pos="0 0 0" range="-3.14159 3.14159" />
+                                                    <joint axis="1 0 0" armature="0.0032" damping="2.0" frictionloss="1.0" limited="true" name="L_Wrist1_Joint" pos="0 0 0" range="-3.14159 3.14159" />
                                                     <geom class="viz" mesh="L_wrist1" rgba="0.20313 0.20313 0.20313 1" />
                                                     <geom class="cls" pos="0 0.046 0" size="0.02 0.03" type="cylinder" />
                                                     <body name="L_Wrist2_Link" pos="0 0.046 0" quat="0 0 -0.707107 0.707107">
                                                         <inertial fullinertia="0.000865450 0.000696917 0.015377823 0 0 0" mass="0.1" pos="0.00063 0.0636 0.00178" />
-                                                        <joint axis="0 1 0" class="csf_11_100_2xh_f" limited="true" name="L_Wrist2_Joint" pos="0 0 0" range="-2.094 2.094" />
+                                                        <joint axis="0 1 0" armature="0.0032" damping="2.0" frictionloss="1.0" limited="true" name="L_Wrist2_Joint" pos="0 0 0" range="-2.094 2.094" />
                                                         <geom class="cls" pos="0 0 -0.025" size="0.03 0.03 0.01" type="box" />
                                                         <geom class="viz" pos="0 0 -0.025" rgba="0.20313 0.20313 0.20313 1" size="0.03 0.03 0.01" type="box" />
                                                         <site class="FTsensor" name="LH_FT" pos="0 0 -0.035" />
@@ -293,58 +277,58 @@
                         </body>
                         <body name="Neck_Link" pos="-0.036 0 0.3795">
                             <inertial fullinertia="0.000058259 0.000036489 0.000058237 -0.000000076 0.000000268 -0.000001002" mass="0.404" pos="-0.0004 -0.002 0.02576" />
-                            <joint axis="0 0 1" class="csf_11_100_2xh_f" limited="true" name="Neck_Joint" pos="0 0 0" range="-1.54 1.54" />
+                            <joint axis="0 0 1" armature="0.0032" damping="4.0" frictionloss="8.22" limited="true" name="Neck_Joint" pos="0 0 0" range="-1.54 1.54" />
                             <geom class="viz" mesh="neck" rgba="0.20313 0.20313 0.20313 1" />
                             <body name="Head_Link" pos="0 0 0.0275">
                                 <inertial fullinertia="0.0079 0.012 0.01 0.0 0.0025 0.0" mass="1.417" pos="0.0372 0 0.0708" />
-                                <joint axis="0 1 0" class="csf_11_100_2xh_f" limited="true" name="Head_Joint" pos="0 0 0" range="-1.54 1.54" />
+                                <joint axis="0 1 0" armature="0.0032" damping="2.0" frictionloss="8.22" limited="true" name="Head_Joint" pos="0 0 0" range="-1.54 1.54" />
                                 <geom class="viz" mesh="head" pos="0.02 0 -0.6" rgba="0.85938 0.07813 0.23438 1" />
                                 <geom class="cls" pos="0.02 0 0.14" size="0.08 0.06 0.086" type="box" />
                             </body>
                         </body>
                         <body name="R_Shoulder1_Link" pos="0.023 -0.154 0.2275">
                             <inertial fullinertia="0.001925606 0.001936576 0.185330098 -0.000001433 0.000002313 -0.000078962" mass="1.6762" pos="-3e-05 -0.00397 0.06029" />
-                            <joint axis="0 0 1" class="shg17_100_2so" limited="true" name="R_Shoulder1_Joint" pos="0 0 0" range="-1.54 2.09" />
+                            <joint axis="0 0 1" armature="0.18" damping="5.0" frictionloss="2.5" limited="true" name="R_Shoulder1_Joint" pos="0 0 0" range="-1.54 2.09" />
                             <geom class="viz" mesh="R_shoulder1" rgba="0.85938 0.07813 0.23438 1" />
                             <geom class="cls" pos="0 0 0.05" size="0.04 0.055" type="cylinder" />
                             <body name="R_Shoulder2_Link" pos="0 -0.0341 0.065">
                                 <inertial fullinertia="0.000989903 0.184275853 0.001067575 -0.000028237 -0.000000465 -0.000000133" mass="0.4016" pos="0.00107 -0.0491 -1e-05" />
-                                <joint axis="0 -1 0" class="shg17_100_2so" limited="true" name="R_Shoulder2_Joint" pos="0 0 0" range="-3.14159 3.14159" />
+                                <joint axis="0 -1 0" armature="0.18" damping="2.0" frictionloss="2.5" limited="true" name="R_Shoulder2_Joint" pos="0 0 0" range="-3.14159 3.14159" />
                                 <geom class="viz" mesh="R_shoulder2" rgba="0.20313 0.20313 0.20313 1" />
                                 <geom class="cls" pos="0 -0.04 0" quat="0.707107 0.707107 0 0" size="0.04 0.025" type="cylinder" />
                                 <body name="R_Shoulder3_Link" pos="0 -0.115 0">
                                     <inertial fullinertia="0.192093159 0.002493784 0.008296854 0.000365084 -0.000002746 0.000023821" mass="2.90141" pos="0.00262 -0.04826 0.00023" />
-                                    <joint axis="-1 0 0" class="shg17_100_2so" limited="true" name="R_Shoulder3_Joint" pos="0 0 0" range="-1.9199 1.9199" />
+                                    <joint axis="-1 0 0" armature="0.18" damping="2.0" frictionloss="2.5" limited="true" name="R_Shoulder3_Joint" pos="0 0 0" range="-1.9199 1.9199" />
                                     <geom class="viz" mesh="R_shoulder3" rgba="0.20313 0.20313 0.20313 1" />
                                     <geom class="cls" pos="0 -0.06 0" quat="0.707107 0.707107 0 0" size="0.04 0.06" type="cylinder" />
 
                                     <geom class="viz" pos="0 0 0" quat="0.707107 0 0.707107 0" rgba="0.20313 0.20313 0.20313 1" size="0.045 0.027" type="cylinder" />
                                     <body name="R_Armlink_Link" pos="0 -0.1281 0">
                                         <inertial fullinertia="0.002878609 0.184381923 0.003117058 -0.000302586 -0.000036001 -0.000398377" mass="0.58517" pos="-0.01896 -0.11642 -0.0119" />
-                                        <joint axis="0 -1 0" class="shg17_100_2so" limited="true" name="R_Armlink_Joint" pos="0 0 0" range="-3.14159 3.14159" />
+                                        <joint axis="0 -1 0" armature="0.18" damping="2.0" frictionloss="2.5" limited="true" name="R_Armlink_Joint" pos="0 0 0" range="-3.14159 3.14159" />
                                         <geom class="viz" mesh="R_arm" rgba="0.85938 0.07813 0.23438 1" />
                                         <geom class="cls" pos="0 -0.08 0" quat="0.707107 0.707107 0 0" size="0.04 0.08" type="cylinder" />
                                         <body name="R_Elbow_Link" pos="0 -0.207 -0.0325">
                                             <inertial fullinertia="0.055865466 0.001895543 0.005958821 -0.000151764 0.000055158 -0.001530917" mass="2.06511" pos="-0.00136 -0.05256 0.01764" />
-                                            <joint axis="1 0 0" class="shg14_100_2so" limited="true" name="R_Elbow_Joint" pos="0 0 0" range="-2.967 3.14159" />
+                                            <joint axis="1 0 0" armature="0.0032" damping="2.0" frictionloss="2.5" limited="true" name="R_Elbow_Joint" pos="0 0 0" range="-2.967 3.14159" />
                                             <geom class="viz" mesh="R_elbow" rgba="0.20313 0.20313 0.20313 1" />
                                             <geom class="cls" pos="0 -0.08 0.0325" quat="0.707107 0.707107 0 0" size="0.04 0.04" type="cylinder" />
                                             <geom class="cls" quat="0.707107 0 0.707107 0" size="0.04 0.04" type="cylinder" />
                                             <geom class="viz" pos="0.003 0 0" quat="0.707107 0 0.707107 0" rgba="0.20313 0.20313 0.20313 1" size="0.034 0.025" type="cylinder" />
                                             <body name="R_Forearm_Link" pos="0 -0.1244 0.0325">
                                                 <inertial fullinertia="0.001053636 0.049889479 0.001266418 -0.000084568 0.000022117 -0.000019539" mass="0.35234" pos="-0.01426 -0.0767 0.00033" />
-                                                <joint axis="0 -1 0" class="shg14_100_2so" limited="true" name="R_Forearm_Joint" pos="0 0 0" range="-3.14159 3.14159" />
+                                                <joint axis="0 -1 0" armature="0.0032" damping="2.0" frictionloss="2.5" limited="true" name="R_Forearm_Joint" pos="0 0 0" range="-3.14159 3.14159" />
                                                 <geom class="viz" mesh="R_forearm" rgba="0.85938 0.07813 0.23438 1" />
                                                 <geom class="cls" pos="0 -0.05 0" quat="0.707107 0.707107 0 0" size="0.04 0.05" type="cylinder" />
                                                 <geom class="cls" pos="0 -0.1451 0" quat="0.707107 0 0.707107 0" size="0.025 0.04" type="cylinder" />
                                                 <body name="R_Wrist1_Link" pos="0 -0.1451 0">
                                                     <inertial fullinertia="0.015205197 0.000396376 0.000683187 -0.000024218 -0.000000263 -0.000000688" mass="0.70923" pos="-0.00158 -0.02153 3e-05" />
-                                                    <joint axis="1 0 0" class="csf_11_100_2xh_f" limited="true" name="R_Wrist1_Joint" pos="0 0 0" range="-3.14159 3.14159" />
+                                                    <joint axis="1 0 0" armature="0.0032" damping="2.0" frictionloss="1.0" limited="true" name="R_Wrist1_Joint" pos="0 0 0" range="-3.14159 3.14159" />
                                                     <geom class="viz" mesh="R_wrist1" rgba="0.20313 0.20313 0.20313 1" />
                                                     <geom class="cls" pos="0 -0.046 0" size="0.02 0.03" type="cylinder" />
                                                     <body name="R_Wrist2_Link" pos="0 -0.046 0" quat="0 0 0.707107 0.707107">
                                                         <inertial fullinertia="0.000865450 0.000696917 0.015377823 0 0 0" mass="0.1" pos="0.00063 -0.0636 0.00178" quat="0.5 0.5 -0.5 0.5" />
-                                                        <joint axis="0 -1 0" class="csf_11_100_2xh_f" limited="true" name="R_Wrist2_Joint" pos="0 0 0" range="-2.094 2.094" />
+                                                        <joint axis="0 -1 0" armature="0.0032" damping="2.0" frictionloss="1.0" limited="true" name="R_Wrist2_Joint" pos="0 0 0" range="-2.094 2.094" />
                                                         <geom class="cls" pos="0 0 -0.025" size="0.03 0.03 0.01" type="box" />
                                                         <geom class="viz" pos="0 0 -0.025" rgba="0.20313 0.20313 0.20313 1" size="0.03 0.03 0.01" type="box" />
                                                         <site class="FTsensor" name="RH_FT" pos="0 0 -0.035" />
