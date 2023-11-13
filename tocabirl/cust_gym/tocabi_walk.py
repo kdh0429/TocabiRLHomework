@@ -39,7 +39,7 @@ control_freq_scale = 1
 class DYROSTocabiEnv(tocabi_walk_env.TocabiEnv):
     def __init__(self, frameskip=int(8/control_freq_scale)):
         super(DYROSTocabiEnv, self).__init__('dyros_tocabi.xml', frameskip)
-        # utils.EzPickle.__init__(self)
+        
         for id in GroundCollisionCheckBodyList:
             self.ground_collision_check_id.append(self.model.body_name2id(id))
         for id in SelfCollisionCheckBodyList:
@@ -47,8 +47,7 @@ class DYROSTocabiEnv(tocabi_walk_env.TocabiEnv):
         self.ground_id.append(0)
         self.right_foot_id.append(self.model.body_name2id("R_Foot_Link"))
         self.left_foot_id.append(self.model.body_name2id("L_Foot_Link"))
-        # for id in ObstacleList:
-        #     self.ground_id.append(self.model.body_name2id(id))
+        
         print("Collision Check ID", self.ground_collision_check_id)
         print("Self Collision Check ID", self.self_collision_check_id)
         print("Ground ID", self.ground_id)
@@ -106,15 +105,11 @@ class DYROSTocabiEnv(tocabi_walk_env.TocabiEnv):
 
         return np.concatenate([np.array(obs).flatten(), np.array(act).flatten()])
 
-
-
     def step(self, a):
         self.action_raw = np.copy(a)
         a = a * self.action_high
         done_by_early_stop = False
-        self.action_cur = a[0:-1] * self.motor_constant_scale
-        # print("Action: ", a)
-        # a[:] = 0.0
+        self.action_cur = a[0:-1] * self.motor_constant_scale\
 
         mocap_cycle_period = self.mocap_data_num* self.mocap_cycle_dt
 
@@ -125,22 +120,6 @@ class DYROSTocabiEnv(tocabi_walk_env.TocabiEnv):
         
         target_data_qpos = np.zeros_like(a)    
         target_data_qpos = cubic(local_time_plus_init, self.mocap_data[self.mocap_data_idx,0], self.mocap_data[next_idx,0], self.mocap_data[self.mocap_data_idx,1:34], self.mocap_data[next_idx,1:34], 0.0, 0.0)
-
-        if (self.perturbation_on):
-            if (self.epi_len % (control_freq_scale*2000) == self.perturb_timing):
-                impulse = np.random.uniform(50, 120)
-                self.pert_duration = control_freq_scale*np.random.randint(25, 250)
-                self.magnitude = impulse/(self.pert_duration*self.dt)
-                theta = np.random.uniform(0, 2*pi)
-                self.new_xfrc[1,0] = self.magnitude * cos(theta)
-                self.new_xfrc[1,1] = self.magnitude * sin(theta)
-                self.cur_pert_duration = 0
-            
-            if (self.cur_pert_duration < self.pert_duration):
-                self.sim.data.xfrc_applied[:] = self.new_xfrc
-                self.cur_pert_duration = self.cur_pert_duration + 1
-            else:
-                self.sim.data.xfrc_applied[:] = np.zeros_like(self.sim.data.xfrc_applied)
 
         if (self.spec is not None):
             if (self.epi_len % int(self.spec.max_episode_steps/4) == int(self.spec.max_episode_steps/4)-1):
@@ -154,9 +133,6 @@ class DYROSTocabiEnv(tocabi_walk_env.TocabiEnv):
             else:
                 self.target_vel = np.copy(self.target_vel)
 
-        # self.target_vel[0] = 0.0
-        # self.target_vel[1] = 0.0
-
         # Simulation
         for _ in range(self.frame_skip):
             upper_torque = Kp[12:]*(target_data_qpos[12:] - self.qpos_noise[12:]) + Kv[12:]*(-self.qvel_noise[12:])
@@ -167,11 +143,9 @@ class DYROSTocabiEnv(tocabi_walk_env.TocabiEnv):
                 a_idx = -self.action_delay
             self.do_simulation(np.concatenate([self.action_log[a_idx], upper_torque]),1) 
             qpos = self.sim.data.qpos[7:]
-            # self.qpos_noise = qpos + np.random.uniform(-0.00001, 0.00001, len(qpos))
             self.qpos_noise = qpos + np.clip(np.random.normal(0, 0.00008 / 3.0, len(qpos)), -0.00008, 0.00008)
             self.qvel_noise = (self.qpos_noise - self.qpos_pre) / self.model.opt.timestep
             self.qpos_pre = np.copy(self.qpos_noise)
-            # self.qvel_lpf = lpf(self.qvel_noise, self.qvel_lpf, 1/self.model.opt.timestep, 4.0)
 
         self.time += self.dt
         self.time += a[-1]
@@ -213,7 +187,6 @@ class DYROSTocabiEnv(tocabi_walk_env.TocabiEnv):
         if (self.sim.data.get_body_xpos("Neck_Link")[2] < 0.8):
             done_by_early_stop = True
 
-        # self.read_sensor_data()
 
         basequat = self.sim.data.get_body_xquat("Neck_Link")
         quat_desired = Quaternion(array=[1,0,0,0])  

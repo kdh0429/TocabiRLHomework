@@ -137,17 +137,8 @@ class TocabiEnv(gym.envs.mujoco.MujocoEnv):
         self.ft_mx_bias = np.random.uniform(-10.0, 10.0, 2)
         self.ft_my_bias = np.random.uniform(-30.0, 30.0, 2)
 
-        # Perturbation
-        self.perturbation_on = False
-        self.new_xfrc = np.zeros_like(self.sim.data.xfrc_applied)
-        self.pert_duration = 0
-        self.magnitude = 0
-        self.cur_pert_duration = 0
-        self.perturb_timing = 0
-
         self.obs_mean = np.genfromtxt('data/obs_mean_fixed.txt', encoding='ascii')
         self.obs_var = np.genfromtxt('data/obs_variance_fixed.txt', encoding='ascii')
-
 
         self.metadata = {
             'render.modes': ['human', 'rgb_array', 'depth_array'],
@@ -177,10 +168,6 @@ class TocabiEnv(gym.envs.mujoco.MujocoEnv):
 
     def _set_action_space(self):
         if self.custom_action_space:
-            # bounds = np.array([[0.0, 0.10], # Phase
-            #                     [-0.10, 0.10],[-0.10, 0.10],[-0.10, 0.10],[-3.14/3, 3.14/3],[-3.14/3, 3.14/3],[-3.14/3, 3.14/3], # Left Foot
-            #                     [-0.10, 0.10],[-0.10, 0.10],[-0.10, 0.10],[-3.14/3, 3.14/3],[-3.14/3, 3.14/3],[-3.14/3, 3.14/3]]) # Right Foot
-            # bounds = np.concatenate([self.model.actuator_ctrlrange.copy(), [[-1.0, 1.0]]])
             bounds = self.model.actuator_ctrlrange.copy()[0:12]
             bounds[:] = [-1.0, 1.0]
             bounds = np.concatenate([bounds, [[0.0, 1.0]]])

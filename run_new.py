@@ -23,14 +23,14 @@ class args:
    run_type = "train" # "train", "fine_tune", "enjoy",
    n_cpu = 1 if run_type == "enjoy" else 8
    task = 'Walk' # "Stand Still", "Squat", "Walk", "AtlasWalk" 
-   render = False # Available when n_cpu = 1
+   render = False # Available when n_cpu = 1 or run_type = "enjoy"
    n_steps = int(2*8192/n_cpu)
-   batch_size = 128 # int((8192/n_cpu)/2)
-   total_timesteps = 480000000
+   batch_size = 128 
+   total_timesteps = 120000000
    initial_lr = 1e-5
    final_lr = 2e-7
    env = None
-   play_model = "ppo2_DYROSTocabi_2023-08-14 12:54:09.115534" # or a pre-trained model
+   play_model = "ppo2_DYROSTocabi_2023-08-14 12:54:09.115534" # tranined model name
    use_pretrained_gravity = False
    gravity_model = "pretrained_2023-03-16 00:38:34.004213"
    flat_terrain = False

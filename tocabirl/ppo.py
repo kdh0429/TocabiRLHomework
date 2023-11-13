@@ -118,8 +118,6 @@ class PPO(sb.PPO):
             iteration += 1
             self._update_current_progress_remaining(self.num_timesteps, total_timesteps)
             self.policy.update_action_noise(self._current_progress_remaining)
-            if (safe_mean([ep_info['l'] for ep_info in self.ep_info_buffer]) > self.env.get_attr("spec")[0].max_episode_steps-2000):
-                self.env.env_method("perturbation_start")
                 
             # Display training infos
             if log_interval is not None and iteration % log_interval == 0:
@@ -179,9 +177,6 @@ class PPO(sb.PPO):
             if self.use_sde and self.sde_sample_freq > 0 and n_steps % self.sde_sample_freq == 0:
                 # Sample a new noise matrix
                 self.policy.reset_noise(env.num_envs)      
-                
-            # if (safe_mean([ep_info['l'] for ep_info in self.ep_info_buffer]) > self.env.get_attr("spec")[0].max_episode_steps-1000):
-            #     self.env.env_method("perturbation_start")
                 
             with th.no_grad():
                 # Convert to pytorch tensor
