@@ -26,7 +26,7 @@ It is recommended to create a new [Anaconda](https://www.anaconda.com/download) 
     conda activate tocabirl
 
 When the python environment is activated, go to the project directory and run
-`pip install .`
+`pip install .` (Notice period).
 
 This should install the `tocabirl` package in site-packages of your python environment. 
 

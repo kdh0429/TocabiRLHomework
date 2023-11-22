@@ -68,9 +68,18 @@ class DYROSTocabiEnv(tocabi_walk_env.TocabiEnv):
         sin_phase = np.array(sin(2*pi*phase))
         cos_phase = np.array(cos(2*pi*phase))     
 
+        # cur_obs = np.concatenate([[fixed_angle[0], fixed_angle[1], fixed_angle[2]],
+        #             (self.qpos_noise[0:12] + self.q_bias).flatten(),
+        #             (self.qvel_noise[0:12]).flatten(),
+        #             sin_phase.flatten(),
+        #             cos_phase.flatten(),
+        #             [self.target_vel[0]],[self.target_vel[1]],
+        #             [self.ft_left_foot[2] + self.ft_bias[0]], [self.ft_right_foot[2] + self.ft_bias[1]],
+        #             [self.torque_left_foot[0] + self.ft_mx_bias[0]], [self.torque_right_foot[0] + self.ft_mx_bias[1]],
+        #             [self.torque_left_foot[1] + self.ft_my_bias[0]], [self.torque_right_foot[1] + self.ft_my_bias[1]]])
         cur_obs = np.concatenate([[fixed_angle[0], fixed_angle[1], fixed_angle[2]],
-                    (self.qpos_noise[0:12] + self.q_bias).flatten(),
-                    (self.qvel_noise[0:12]).flatten(),
+                    qpos[7:19].flatten(),
+                    qvel[6:18].flatten(),
                     sin_phase.flatten(),
                     cos_phase.flatten(),
                     [self.target_vel[0]],[self.target_vel[1]],
@@ -327,31 +336,31 @@ class DYROSTocabiEnv(tocabi_walk_env.TocabiEnv):
         self.epi_reward = 0
 
         # Dynamics Randomization
-        body_mass = np.array(self.nominal_body_mass)
-        self.body_mass_noise = np.random.uniform(0.8, 1.2, len(body_mass))
-        body_mass = body_mass * self.body_mass_noise
-        self.model.body_mass[:]  = body_mass
+        # body_mass = np.array(self.nominal_body_mass)
+        # self.body_mass_noise = np.random.uniform(0.8, 1.2, len(body_mass))
+        # body_mass = body_mass * self.body_mass_noise
+        # self.model.body_mass[:]  = body_mass
 
-        body_inertia = np.array(self.nominal_body_inertia)
-        body_inertia_noise = np.random.uniform(0.8, 1.2, len(body_inertia))
-        body_inertia = np.multiply(body_inertia, body_inertia_noise[:, np.newaxis])
-        self.model.body_inertia[:]  = body_inertia
+        # body_inertia = np.array(self.nominal_body_inertia)
+        # body_inertia_noise = np.random.uniform(0.8, 1.2, len(body_inertia))
+        # body_inertia = np.multiply(body_inertia, body_inertia_noise[:, np.newaxis])
+        # self.model.body_inertia[:]  = body_inertia
         
 
-        body_ipos = np.array(self.nominal_body_ipos)
-        body_ipos_noise = np.random.uniform(0.8, 1.2, len(body_ipos))
-        body_ipos = np.multiply(body_ipos, body_ipos_noise[:, np.newaxis])
-        self.model.body_ipos[:]  = body_ipos
+        # body_ipos = np.array(self.nominal_body_ipos)
+        # body_ipos_noise = np.random.uniform(0.8, 1.2, len(body_ipos))
+        # body_ipos = np.multiply(body_ipos, body_ipos_noise[:, np.newaxis])
+        # self.model.body_ipos[:]  = body_ipos
         
-        self.dof_damping = np.array(self.nominal_dof_damping)
-        dof_damping_noise = np.random.uniform(0.1, 20.0, len(self.dof_damping))
-        self.dof_damping = np.random.uniform(0.1, 3.0, len(self.dof_damping))
-        self.model.dof_damping[:]  = self.dof_damping
+        # self.dof_damping = np.array(self.nominal_dof_damping)
+        # dof_damping_noise = np.random.uniform(0.1, 20.0, len(self.dof_damping))
+        # self.dof_damping = np.random.uniform(0.1, 3.0, len(self.dof_damping))
+        # self.model.dof_damping[:]  = self.dof_damping
 
-        self.dof_frictionloss = np.array(self.nominal_dof_frictionloss)
-        dof_frictionloss_noise = np.random.uniform(0.8, 1.2, len(self.dof_frictionloss))
-        self.dof_frictionloss = self.dof_frictionloss * dof_frictionloss_noise 
-        self.model.dof_frictionloss[:]  = self.dof_frictionloss
+        # self.dof_frictionloss = np.array(self.nominal_dof_frictionloss)
+        # dof_frictionloss_noise = np.random.uniform(0.8, 1.2, len(self.dof_frictionloss))
+        # self.dof_frictionloss = self.dof_frictionloss * dof_frictionloss_noise 
+        # self.model.dof_frictionloss[:]  = self.dof_frictionloss
 
         # Motor Constant Randomization
         self.motor_constant_scale = np.random.uniform(0.80, 1.2, 12)
@@ -384,6 +393,15 @@ class DYROSTocabiEnv(tocabi_walk_env.TocabiEnv):
         self.ft_bias = np.random.uniform(-100.0, 100.0, 2)
         self.ft_mx_bias = np.random.uniform(-10.0, 10.0, 2)
         self.ft_my_bias = np.random.uniform(-10.0, 10.0, 2)
+
+        # Remove uncertainties
+        self.motor_constant_scale.fill(1.0)
+        self.action_delay = 1
+        self.q_bias.fill(0.0)
+        self.quat_bias.fill(0.0)
+        self.ft_bias.fill(0.0)
+        self.ft_mx_bias.fill(0.0)
+        self.ft_my_bias.fill(0.0)
 
         self.action_log = []
         self.data_log = []
