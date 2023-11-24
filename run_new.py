@@ -26,11 +26,11 @@ class args:
    render = False # Available when n_cpu = 1 or run_type = "enjoy"
    n_steps = int(2*8192/n_cpu)
    batch_size = 128 
-   total_timesteps = 80000000
+   total_timesteps = 120000000
    initial_lr = 1e-5
    final_lr = 2e-7
    env = None
-   play_model = "ppo2_DYROSTocabi_2023-11-21 10:55:55.288059" # tranined model name
+   play_model = "ppo2_DYROSTocabi_2023-11-23 15:37:06.338899" # tranined model name
 
 def linear_schedule(initial_lr: float, final_lr:float) -> Callable[[float], float]:
     """

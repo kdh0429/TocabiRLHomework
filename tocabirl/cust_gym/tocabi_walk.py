@@ -68,15 +68,6 @@ class DYROSTocabiEnv(tocabi_walk_env.TocabiEnv):
         sin_phase = np.array(sin(2*pi*phase))
         cos_phase = np.array(cos(2*pi*phase))     
 
-        # cur_obs = np.concatenate([[fixed_angle[0], fixed_angle[1], fixed_angle[2]],
-        #             (self.qpos_noise[0:12] + self.q_bias).flatten(),
-        #             (self.qvel_noise[0:12]).flatten(),
-        #             sin_phase.flatten(),
-        #             cos_phase.flatten(),
-        #             [self.target_vel[0]],[self.target_vel[1]],
-        #             [self.ft_left_foot[2] + self.ft_bias[0]], [self.ft_right_foot[2] + self.ft_bias[1]],
-        #             [self.torque_left_foot[0] + self.ft_mx_bias[0]], [self.torque_right_foot[0] + self.ft_mx_bias[1]],
-        #             [self.torque_left_foot[1] + self.ft_my_bias[0]], [self.torque_right_foot[1] + self.ft_my_bias[1]]])
         cur_obs = np.concatenate([[fixed_angle[0], fixed_angle[1], fixed_angle[2]],
                     qpos[7:19].flatten(),
                     qvel[6:18].flatten(),

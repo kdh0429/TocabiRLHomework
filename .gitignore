@@ -4,6 +4,4 @@ wandb/
 tocabirl/__pycache__
 tocabirl/cust_gym/__pycache__
 tocabirl/cust_gym/utils/__pycache__
-result/
 .vscode/
-trained_model/
